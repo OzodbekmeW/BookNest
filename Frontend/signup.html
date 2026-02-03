@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish - BookNest</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div class="auth-page">
+        <!-- Left Side - Branding -->
+        <div class="auth-brand">
+            <div class="brand-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>BookNest</span>
+                </a>
+                <h1>Adabiy sayohatingizni boshlang</h1>
+                <p>Bizga qo'shiling va minglab kitoblar dunyosiga kirish oling</p>
+                
+                <div class="brand-features">
+                    <div class="feature">
+                        <i class="fas fa-gift"></i>
+                        <span>Birinchi xaridda chegirma</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <span>Sevimli kitoblar ro'yxati</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-history"></i>
+                        <span>Buyurtmalar tarixi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Signup Form -->
+        <div class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2>Ro'yxatdan o'tish</h2>
+                    <p>Hisobingizni yarating va kitoblar olamiga qo'shiling</p>
+                </div>
+
+                <form id="signupForm" class="form">
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+                    
+                    <!-- Success Message -->
+                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                            Login <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            required 
+                            placeholder="Loginni tanlang"
+                            autocomplete="username"
+                            pattern="[a-zA-Z0-9_]{3,20}"
+                            title="3-20 ta belgi, faqat harflar, raqamlar va pastki chiziq"
+                        >
+                        <small class="form-hint">3-20 ta belgi, faqat harflar va raqamlar</small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            placeholder="email@example.com"
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <!-- Name Fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-id-card"></i>
+                                Ism
+                            </label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                placeholder="Ismingiz"
+                                autocomplete="given-name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-id-card"></i>
+                                Familiya
+                            </label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                placeholder="Familiyangiz"
+                                autocomplete="family-name"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Parol <span class="required">*</span>
+                        </label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required 
+                                placeholder="Parol yarating"
+                                autocomplete="new-password"
+                                minlength="8"
+                            >
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar"></div>
+                            <span class="strength-text">Parol kuchi</span>
+                        </div>
+                        <small class="form-hint">Kamida 8 ta belgi</small>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="passwordConfirm">
+                            <i class="fas fa-lock"></i>
+                            Parolni tasdiqlang <span class="required">*</span>
+                        </label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="passwordConfirm" 
+                                name="passwordConfirm" 
+                                required 
+                                placeholder="Parolni qayta kiriting"
+                                autocomplete="new-password"
+                            >
+                            <button type="button" class="toggle-password" id="togglePasswordConfirm">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <span>Men <a href="/terms.html" target="_blank">Foydalanish shartlari</a> va <a href="/privacy.html" target="_blank">Maxfiylik siyosati</a>ga roziman</span>
+                        </label>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked>
+                            <span>Yangiliklar va maxsus takliflar haqida xabar olish</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-block" id="signupButton">
+                        <i class="fas fa-user-plus"></i>
+                        Ro'yxatdan o'tish
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="divider">
+                        <span>yoki</span>
+                    </div>
+
+                    <!-- Social Signup -->
+                    <div class="social-login">
+                        <button type="button" class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i>
+                            Google orqali ro'yxatdan o'tish
+                        </button>
+                        <button type="button" class="btn btn-social btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                            Facebook orqali ro'yxatdan o'tish
+                        </button>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="form-footer">
+                        <p>Hisobingiz bormi? <a href="login.html">Kirish</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

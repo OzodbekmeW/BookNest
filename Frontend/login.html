@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirish - BookNest</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div class="auth-page">
+        <!-- Left Side - Branding -->
+        <div class="auth-brand">
+            <div class="brand-content">
+                <a href="/" class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>BookNest</span>
+                </a>
+                <h1>Adabiy dunyongizga xush kelibsiz</h1>
+                <p>Minglab kitoblar, bir joyda. O'qish zavqini his qiling.</p>
+                
+                <div class="brand-features">
+                    <div class="feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Tez yetkazib berish</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Xavfsiz to'lov</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-star"></i>
+                        <span>Sifatli kitoblar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2>Tizimga kirish</h2>
+                    <p>Hisobingizga kirib, kitoblar dunyosini kashf qiling</p>
+                </div>
+
+                <form id="loginForm" class="form">
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+                    
+                    <!-- Success Message -->
+                    <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+                    <!-- Username/Email -->
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                            Login yoki Email
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            required 
+                            placeholder="Loginni yoki emailni kiriting"
+                            autocomplete="username"
+                        >
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Parol
+                        </label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required 
+                                placeholder="Parolni kiriting"
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <span>Meni eslab qol</span>
+                        </label>
+                        <a href="forgot-password.html" class="forgot-password">Parolni unutdingizmi?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-block" id="loginButton">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Kirish
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="divider">
+                        <span>yoki</span>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="social-login">
+                        <button type="button" class="btn btn-social btn-google">
+                            <i class="fab fa-google"></i>
+                            Google orqali kirish
+                        </button>
+                        <button type="button" class="btn btn-social btn-facebook">
+                            <i class="fab fa-facebook"></i>
+                            Facebook orqali kirish
+                        </button>
+                    </div>
+
+                    <!-- Sign Up Link -->
+                    <div class="form-footer">
+                        <p>Hisobingiz yo'qmi? <a href="signup.html">Ro'yxatdan o'tish</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

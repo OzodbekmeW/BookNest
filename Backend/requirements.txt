@@ -1,0 +1,8 @@
+Django==5.0.2
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+Pillow>=10.0.0
+django-cors-headers==4.3.1
+python-decouple==3.8
+django-filter==24.1
+drf-yasg==1.21.7

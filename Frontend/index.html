@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNest - Adabiy Dunyongiz</title>
+    <meta name="description" content="BookNest - O'zbekistondagi eng yaxshi onlayn kitob do'koni. Minglab kitoblar, tez yetkazib berish, qulay narxlar.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <div class="nav-brand">
+                    <a href="/" class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <span>BookNest</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Bosh sahifa</a></li>
+                    <li><a href="#books" class="nav-link">Kitoblar</a></li>
+                    <li><a href="#categories" class="nav-link">Kategoriyalar</a></li>
+                    <li><a href="#bestsellers" class="nav-link">Ommabop</a></li>
+                    <li><a href="#contact" class="nav-link">Aloqa</a></li>
+                </ul>
+
+                <!-- Search & Actions -->
+                <div class="nav-actions">
+                    <!-- Search -->
+                    <div class="search-box">
+                        <input type="text" placeholder="Kitob, muallif izlash..." id="searchInput">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <!-- Cart & User -->
+                    <div class="action-buttons">
+                        <button class="action-btn" id="wishlistBtn">
+                            <i class="far fa-heart"></i>
+                            <span class="badge">0</span>
+                        </button>
+                        <button class="action-btn" id="cartBtn">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="badge">0</span>
+                        </button>
+                        
+                        <!-- User Menu -->
+                        <div class="user-menu-container" id="userMenuContainer">
+                            <button class="action-btn" id="userBtn">
+                                <i class="far fa-user"></i>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div class="user-dropdown" id="userDropdown">
+                                <!-- Not Logged In -->
+                                <div class="user-guest" id="guestMenu">
+                                    <div class="dropdown-header">
+                                        <i class="fas fa-user-circle"></i>
+                                        <div>
+                                            <h4>Xush kelibsiz!</h4>
+                                            <p>Tizimga kiring yoki ro'yxatdan o'ting</p>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-actions">
+                                        <a href="login.html" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                            Kirish
+                                        </a>
+                                        <a href="signup.html" class="btn btn-outline btn-sm">
+                                            <i class="fas fa-user-plus"></i>
+                                            Ro'yxatdan o'tish
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Logged In -->
+                                <div class="user-authenticated" id="authMenu" style="display: none;">
+                                    <div class="dropdown-header">
+                                        <i class="fas fa-user-circle"></i>
+                                        <div>
+                                            <h4 id="userName">Foydalanuvchi</h4>
+                                            <p id="userEmail">user@example.com</p>
+                                        </div>
+                                    </div>
+                                    <ul class="dropdown-links">
+                                        <li><a href="#"><i class="fas fa-user"></i> Profil</a></li>
+                                        <li><a href="#"><i class="fas fa-box"></i> Buyurtmalarim</a></li>
+                                        <li><a href="#"><i class="fas fa-heart"></i> Sevimlilar</a></li>
+                                        <li><a href="#"><i class="fas fa-cog"></i> Sozlamalar</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" id="logoutBtn" class="logout-link"><i class="fas fa-sign-out-alt"></i> Chiqish</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Toggle -->
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="gradient-text">Dunyoni kitoblar bilan </span><br>
+                        kashf eting
+                    </h1>
+                    <p class="hero-subtitle">
+                        O'zbekiston va dunyoning eng sara kitoblari bir joyda. 
+                        Yangi bilimlar va hikoyalarga sarguzasht boshlang.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="scrollToSection('books')">
+                            <i class="fas fa-rocket"></i>
+                            Kitoblarni ko'rish
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-play"></i>
+                            Video tanishish
+                        </button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Kitoblar</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5K+</span>
+                            <span class="stat-label">Mijozlar</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">99%</span>
+                            <span class="stat-label">Mamnunlik</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual -->
+                <div class="hero-visual">
+                    <div class="hero-books">
+                        <div class="book-card float-1">
+                            <div class="book-cover bg-gradient-1">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                        <div class="book-card float-2">
+                            <div class="book-cover bg-gradient-2">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                        </div>
+                        <div class="book-card float-3">
+                            <div class="book-cover bg-gradient-3">
+                                <i class="fas fa-feather"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-decoration">
+                        <div class="decoration-circle circle-1"></div>
+                        <div class="decoration-circle circle-2"></div>
+                        <div class="decoration-circle circle-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Kategoriyalar</h2>
+                <p class="section-subtitle">O'zingizga mos kategoriyani tanlang va sevimli kitoblaringizni toping</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('fiction')">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Badiiy adabiyot</h3>
+                    <p>Romantika, drama, fantasiya</p>
+                    <span class="category-count">2,847 kitob</span>
+                </div>
+
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('klassik')">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Klassik adabiyot</h3>
+                    <p>O'zbek klassikasi</p>
+                    <span class="category-count">1,523 kitob</span>
+                </div>
+
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('biznes')">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Biznes va iqtisod</h3>
+                    <p>Tadbirkorlik, moliya, marketing</p>
+                    <span class="category-count">892 kitob</span>
+                </div>
+
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('zamonaviy')">
+                    <div class="category-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Zamonaviy adabiyot</h3>
+                    <p>Hozirgi zamon asarlari</p>
+                    <span class="category-count">1,156 kitob</span>
+                </div>
+
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('yoshlar')">
+                    <div class="category-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Yoshlar uchun</h3>
+                    <p>Yosh avlod adabiyoti</p>
+                    <span class="category-count">743 kitob</span>
+                </div>
+
+                <div class="category-card" onclick="window.bookManager && window.bookManager.filterBooks('dasturlash')">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Dasturlash</h3>
+                    <p>IT va texnologiya</p>
+                    <span class="category-count">2,134 kitob</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books Section -->
+    <section id="books" class="featured-books">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tavsiya etilgan kitoblar</h2>
+                <p class="section-subtitle">Mutaxassislarimiz tomonidan tanlangan eng yaxshi kitoblar</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Hammasi</button>
+                <button class="filter-tab" data-filter="klassik">Klassik</button>
+                <button class="filter-tab" data-filter="zamonaviy">Zamonaviy</button>
+                <button class="filter-tab" data-filter="biznes">Biznes</button>
+            </div>
+
+            <!-- Books Grid -->
+            <div class="books-grid" id="booksGrid">
+                <!-- Book cards will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Load More -->
+            <div class="load-more">
+                <button class="btn btn-outline" id="loadMoreBtn">
+                    <i class="fas fa-plus"></i>
+                    Ko'proq yuklash
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers Section -->
+    <section id="bestsellers" class="bestsellers">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Eng ko'p sotilgan kitoblar</h2>
+                <p class="section-subtitle">O'quvchilar tomonidan eng ko'p sevib o'qiladigan kitoblar</p>
+            </div>
+
+            <div class="bestsellers-list" id="bestsellersList">
+                <!-- Bestsellers will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>Yangiliklar va aksiyalardan xabardor bo'ling</h2>
+                    <p>Eng so'nggi kitoblar, chegirmalar va maxsus takliflar haqida birinchilardan bo'lib bilib oling</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Email manzilingizni kiriting" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Obuna bo'lish
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="/" class="logo">
+                            <i class="fas fa-book-open"></i>
+                            <span>BookNest</span>
+                        </a>
+                        <p>O'zbekistondagi eng yaxshi onlayn kitob do'koni. Sifatli kitoblar, tez yetkazib berish, qulay narxlar.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Tezkor havolalar</h3>
+                    <ul>
+                        <li><a href="#books">Kitoblar</a></li>
+                        <li><a href="#categories">Kategoriyalar</a></li>
+                        <li><a href="#bestsellers">Ommabop kitoblar</a></li>
+                        <li><a href="#contact">Aloqa</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Yordam</h3>
+                    <ul>
+                        <li><a href="#">Yetkazib berish</a></li>
+                        <li><a href="#">To'lov usullari</a></li>
+                        <li><a href="#">Qaytarish</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 id="contact">Aloqa</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+998 90 123 45 67</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@booknest.uz</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Toshkent, O'zbekiston</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 BookNest. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="book-loader">
+                <div class="book-page"></div>
+                <div class="book-page"></div>
+                <div class="book-page"></div>
+            </div>
+            <p>BookNest yuklanmoqda...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

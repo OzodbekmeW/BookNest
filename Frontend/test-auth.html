@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Test - BookNest</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        a {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 10px 20px;
+            background: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 BookNest Authentication Test</h1>
+
+    <div class="test-section">
+        <h2>📄 Sahifalar</h2>
+        <a href="signup.html" target="_blank">📝 Ro'yxatdan o'tish (signup.html)</a>
+        <a href="login.html" target="_blank">🔑 Kirish (login.html)</a>
+        <a href="index.html" target="_blank">🏠 Bosh sahifa (index.html)</a>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Backend Server</h2>
+        <div id="serverStatus" class="status info">Tekshirilmoqda...</div>
+        <button onclick="checkServer()">Server holatini tekshirish</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 API Test</h2>
+        <button onclick="testRegister()">Register API test</button>
+        <button onclick="testLogin()">Login API test</button>
+        <button onclick="testLogout()">Logout API test</button>
+        <div id="apiResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>💾 LocalStorage</h2>
+        <button onclick="checkStorage()">Storage ko'rish</button>
+        <button onclick="clearStorage()">Storage tozalash</button>
+        <pre id="storageContent"></pre>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Test Ma'lumotlari</h2>
+        <pre>
+Username: testuser
+Email: test@example.com
+Password: Test12345!
+        </pre>
+    </div>
+
+    <div class="test-section">
+        <h2>✅ Test Qadamlari</h2>
+        <ol>
+            <li>Serverning ishlab turganini tekshiring (yuqoridagi tugma)</li>
+            <li>"Register API test" tugmasini bosing - ishlab tursa, server to'g'ri</li>
+            <li><a href="signup.html">signup.html</a> ni oching</li>
+            <li>Browser Console ni oching (F12 → Console tab)</li>
+            <li>Formani to'ldiring va "Ro'yxatdan o'tish" ni bosing</li>
+            <li>Console da "Signup form submitted:" xabari ko'rinishi kerak</li>
+            <li>Agar xato bo'lsa, qizil xabar ko'rinadi</li>
+            <li>Muvaffaqiyatli bo'lsa, index.html ga o'tadi</li>
+        </ol>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:8000/api';
+
+        async function checkServer() {
+            const statusDiv = document.getElementById('serverStatus');
+            statusDiv.textContent = 'Tekshirilmoqda...';
+            statusDiv.className = 'status info';
+            
+            try {
+                const response = await fetch(`${API_URL}/users/register/`, {
+                    method: 'OPTIONS'
+                });
+                
+                if (response.ok) {
+                    statusDiv.textContent = '✅ Server ishlayapti! (' + response.status + ')';
+                    statusDiv.className = 'status success';
+                } else {
+                    statusDiv.textContent = '⚠️ Server javob berdi lekin xato: ' + response.status;
+                    statusDiv.className = 'status error';
+                }
+            } catch (error) {
+                statusDiv.textContent = '❌ Server ishlamayapti: ' + error.message;
+                statusDiv.className = 'status error';
+            }
+        }
+
+        async function testRegister() {
+            const resultDiv = document.getElementById('apiResult');
+            resultDiv.innerHTML = '<div class="status info">Registratsiya test qilinmoqda...</div>';
+            
+            try {
+                const response = await fetch(`${API_URL}/users/register/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'testuser_' + Date.now(),
+                        email: 'test' + Date.now() + '@example.com',
+                        password: 'Test12345!',
+                        first_name: 'Test',
+                        last_name: 'User'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.token) {
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ Registratsiya muvaffaqiyatli!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ Registratsiya xatosi</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ Xato: ${error.message}</div>
+                `;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('apiResult');
+            resultDiv.innerHTML = '<div class="status info">Login test qilinmoqda...</div>';
+            
+            try {
+                const response = await fetch(`${API_URL}/users/login/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'test_user',
+                        password: 'Test12345!'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.token) {
+                    localStorage.setItem('authToken', data.token);
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ Login muvaffaqiyatli!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ Login xatosi</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ Xato: ${error.message}</div>
+                `;
+            }
+        }
+
+        async function testLogout() {
+            const resultDiv = document.getElementById('apiResult');
+            const token = localStorage.getItem('authToken');
+            
+            if (!token) {
+                resultDiv.innerHTML = '<div class="status error">❌ Token topilmadi. Avval login qiling.</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="status info">Logout test qilinmoqda...</div>';
+            
+            try {
+                const response = await fetch(`${API_URL}/users/logout/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.removeItem('authToken');
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ Logout muvaffaqiyatli!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ Logout xatosi</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ Xato: ${error.message}</div>
+                `;
+            }
+        }
+
+        function checkStorage() {
+            const storageDiv = document.getElementById('storageContent');
+            const storage = {
+                authToken: localStorage.getItem('authToken'),
+                userId: localStorage.getItem('userId'),
+                username: localStorage.getItem('username'),
+                userEmail: localStorage.getItem('userEmail')
+            };
+            storageDiv.textContent = JSON.stringify(storage, null, 2);
+        }
+
+        function clearStorage() {
+            localStorage.clear();
+            sessionStorage.clear();
+            checkStorage();
+            alert('Storage tozalandi!');
+        }
+
+        // Auto-check server on load
+        window.onload = function() {
+            checkServer();
+            checkStorage();
+        };
+    </script>
+</body>
+</html>
