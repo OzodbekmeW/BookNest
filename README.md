@@ -1,5 +1,16 @@
 # 📚 BookNest - Onlayn Kitob Do'koni
 
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django)
+![DRF](https://img.shields.io/badge/DRF-3.14-red?style=for-the-badge&logo=django)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=for-the-badge&logo=sqlite)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+</div>
+
 O'zbek tilida ishlaydigan zamonaviy kitob savdo platformasi. Django backend va vanilla JavaScript frontend bilan qurilgan.
 
 ## ✨ Imkoniyatlar
